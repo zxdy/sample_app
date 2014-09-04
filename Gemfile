@@ -13,7 +13,7 @@ group :test do
   gem 'capybara', '2.1.0'
 end
 
-gem 'sass-rails', '4.0.1'
+gem 'sass-rails', '4.0.3'
 gem 'uglifier', '2.1.1'
 gem 'coffee-rails', '4.0.1'
 gem 'jquery-rails', '2.2.1'
@@ -25,7 +25,7 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw]
 gem 'spork-rails', '4.0.0'
 gem 'guard-spork', '1.5.0'
 gem 'childprocess', '0.5.3'
-
+gem 'bootstrap-sass', '2.3.2.0'
 group :doc do
   gem 'sdoc', '0.3.20', require: false
 end
