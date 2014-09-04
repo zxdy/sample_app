@@ -69,7 +69,7 @@ p {
 }
 
 #logo:hover {
-  color: #fff;
+  color: #9e66ff;
   text-decoration: none;
 }
 
@@ -103,4 +103,14 @@ footer ul {
 footer ul li {
   float: left;
   margin-left: 10px;
+}
+
+
+.row h2{
+  margin-right: 10px;
+  font-size: 1.5em;
+  text-align: left;
+  color: rgb(0, 0, 0);
+  text-transform: uppercase;
+  font-weight: bold;
 }
