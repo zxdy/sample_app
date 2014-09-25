@@ -21,7 +21,7 @@ gem 'turbolinks', '1.1.1'
 gem 'jbuilder', '1.0.2'
 gem 'minitest'
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw]
-
+gem 'bcrypt-ruby', '3.1.1'
 gem 'spork-rails', '4.0.0'
 gem 'guard-spork', '1.5.0'
 gem 'childprocess', '0.5.3'
