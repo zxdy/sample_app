@@ -1,0 +1,31 @@
+<h1>All Failed Jobs</h1>
+
+<%= will_paginate %>
+
+<ul class="jobs col-md-6">
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th>#</th>
+      <th>Log Date</th>
+      <th>Pool Name</th>
+      <th>Server List</th>
+      <th>Fail Name</th>
+      <td>#</td>
+    </tr>
+    </thead>
+    <tbody>
+  <% @jobs.each do |job| %>
+    <tr>
+        <td><%= job.id %></td>
+        <td><%= job.logdate %></td>
+        <td><%= job.poolname %></td>
+        <td><%= job.serverlist %></td>
+        <td><%= job.failtime %></td>
+        <td><button type="button" class="btn btn-sm btn-danger">Redo</button></td>
+    </tr>
+  <% end %>
+  </tbody>
+    </table>
+</ul>
+<%= will_paginate %>

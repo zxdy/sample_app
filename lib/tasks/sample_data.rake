@@ -1,9 +1,10 @@
 namespace :db do
   desc "Fill database with sample data"
   task populate: :environment do
-    make_users
-    make_microposts
-    make_relationships
+    # make_users
+    # make_microposts
+    # make_relationships
+    make_jobs
   end
 
   def make_users
@@ -36,5 +37,18 @@ namespace :db do
     followers      = users[3..40]
     followed_users.each { |followed| user.follow!(followed) }
     followers.each      { |follower| follower.follow!(user) }
+  end
+
+  def make_jobs
+    10.times do
+      log_date=Time.now
+      pool_name="tsj1"
+      server_list="aosdjcapow.com"
+      fail_time=Time.now
+      Jobs.create!(logdate: log_date,
+                   poolname: pool_name,
+                   serverlist:server_list,
+                   failtime:fail_time)
+    end
   end
 end

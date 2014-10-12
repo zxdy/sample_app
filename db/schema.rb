@@ -11,7 +11,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140926060540) do
+ActiveRecord::Schema.define(version: 20141012073610) do
+
+  create_table "jobs", force: true do |t|
+    t.date     "logdate"
+    t.string   "poolname"
+    t.string   "serverlist"
+    t.datetime "failtime"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "microposts", force: true do |t|
     t.string   "content"
