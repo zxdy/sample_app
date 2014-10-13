@@ -15,15 +15,6 @@
 //= require bootstrap
 //= require turbolinks
 //= require_tree .
-$(function() {
-    $( "#datepicker" ).datepicker();
-});
-
 $(document).ready(function(){
-    $("#search").click(function(){
-        $.get("/failed",
-            function(data,status){
-                $("#failedJob").html(data);
-            });
-    });
+    $( "#datepicker" ).datepicker();
 });
