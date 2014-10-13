@@ -16,6 +16,7 @@ Rails.application.routes.draw do
   match '/contact', to: 'static_pages#contact', via: 'get'
   match '/reprocess', to: 'static_pages#reprocess', via: 'get'
   match '/failed',  to: 'jobs#index',            via: 'get'
+  match '/jobs/search', to: 'jobs#search',      via:'get'
   match '/signup',  to: 'users#new',            via: 'get'
   match '/signin',  to: 'sessions#new',         via: 'get'
   match '/signout', to: 'sessions#destroy',     via: 'delete'
