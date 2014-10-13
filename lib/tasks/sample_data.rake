@@ -40,7 +40,7 @@ namespace :db do
   end
 
   def make_jobs
-    10.times do
+    50.times do
       log_date=Time.now
       pool_name="tsj1"
       server_list="aosdjcapow.com"

@@ -8,6 +8,13 @@ class JobsController < ApplicationController
     @job = Jobs.find(params[:id])
   end
 
+  def search
+    @jobs = Jobs.paginate(page: params[:page],per_page:10)
+    respond_to do |format|
+      format.html
+      format.js
+    end
+  end
   def new
 
   end
