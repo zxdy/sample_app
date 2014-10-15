@@ -9,7 +9,7 @@ class JobsController < ApplicationController
   end
 
   def search
-    @jobs = Job.where("logdate > datetime(:start_date)-1 AND logdate <= datetime(:start_date)",{start_date: params[:log_date]}).paginate(page: params[:page],per_page:10)
+    @jobs = Job.where("logdate between :start_date AND :start_date",{start_date: params[:log_date]}).paginate(page: params[:page],per_page:10)
     respond_to do |format|
       format.html
       format.js
