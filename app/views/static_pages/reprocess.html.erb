@@ -3,7 +3,7 @@
   <!--Date: <input type="text" id="datepicker" class="datepicker">-->
   <!--<button id="search">Search</button>-->
   <!--<div id="failedJob"></div>-->
-  <%= form_tag("/jobs/search", method: "get",remote:true) do %>
+  <%= form_tag("/jobs", method: "get",remote:true) do %>
         <%= label_tag(:q, "Search for:") %>
         <%= text_field_tag(:datepicker,nil,class:'datepicker',name:'log_date') %>
         <%= button_tag("Search") %>

@@ -41,8 +41,6 @@ module SessionsHelper
   end
   def store_params
     session[:start_date] = params[:log_date]
-  end
-  def get_log_date
-    return session[:start_date]
+    session[:page]=params[:page]
   end
 end
