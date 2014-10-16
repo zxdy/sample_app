@@ -45,7 +45,7 @@ namespace :db do
       pool_name="tsj1"
       server_list="aosdjcapow.com"
       fail_time=Time.now
-      Jobs.create!(logdate: log_date,
+      Job.create!(logdate: log_date,
                    poolname: pool_name,
                    serverlist:server_list,
                    failtime:fail_time)
