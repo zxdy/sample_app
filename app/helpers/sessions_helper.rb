@@ -39,4 +39,10 @@ module SessionsHelper
   def store_location
     session[:return_to] = request.fullpath if request.get?
   end
+  def store_params
+    session[:start_date] = params[:log_date]
+  end
+  def get_log_date
+    return session[:start_date]
+  end
 end

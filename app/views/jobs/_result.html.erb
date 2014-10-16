@@ -22,7 +22,11 @@
           <td><%= job.poolname %></td>
           <td><%= job.serverlist %></td>
           <td><%= job.failtime %></td>
-          <td><button type="button" class="btn btn-sm btn-danger">Redo</button></td>
+          <td><%= link_to "delete", job, method: :delete,
+                          data: { confirm: "You sure?" }
+          %>
+            <!--<button type="button" class="btn btn-sm btn-danger">Delete</button>-->
+          </td>
         </tr>
     <% end %>
     </tbody>
