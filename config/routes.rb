@@ -4,6 +4,7 @@ Rails.application.routes.draw do
       get :following, :followers
     end
   end
+  get 'jobs/:id(.:format)', to: 'jobs#index', constraints: { format: /page/ }
   resources  :jobs
   resources :sessions, only: [:new, :create, :destroy]
   resources :microposts, only: [:create, :destroy]

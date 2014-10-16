@@ -40,7 +40,7 @@ module SessionsHelper
     session[:return_to] = request.fullpath if request.get?
   end
   def store_params
-    session[:start_date] = params[:log_date]
-    session[:page]=params[:page]
+    session[:start_date] = params[:log_date] if params[:log_date]!=nil
+    session[:page]=params[:page] if params[:page]!=nil
   end
 end
