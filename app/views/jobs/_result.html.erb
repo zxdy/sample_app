@@ -22,10 +22,20 @@
           <td><%= job.poolname %></td>
           <td><%= job.serverlist %></td>
           <td><%= job.failtime %></td>
-          <td><%= link_to "delete", job, method: :delete,
-                          data: { confirm: "You sure?" }
-          %>
-            <!--<button type="button" class="btn btn-sm btn-danger">Delete</button>-->
+          <td>
+            <div class="dropdown">
+              <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown">
+                Action
+                <span class="caret"></span>
+              </button>
+              <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                <li role="presentation">
+                  <%= link_to "delete", job, method: :delete,
+                              data: { confirm: "You sure?" },
+                              role:"menuitem"%>
+                </li>
+              </ul>
+            </div>
           </td>
         </tr>
     <% end %>
