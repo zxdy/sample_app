@@ -1,0 +1,8 @@
+<% provide(:title, 'upload') %>
+<div>
+  <%= form_tag({action: :upload}, multipart: true) do %>
+      <%= file_field_tag 'picture' %>
+      <%= button_tag("upload") %>
+  <% end %>
+
+</div>

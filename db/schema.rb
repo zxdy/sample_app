@@ -11,7 +11,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141012073610) do
+ActiveRecord::Schema.define(version: 20141022141751) do
+
+  create_table "cards", force: true do |t|
+    t.string   "card_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "jobs", force: true do |t|
     t.date     "logdate"
@@ -41,6 +47,13 @@ ActiveRecord::Schema.define(version: 20141012073610) do
   add_index "relationships", ["followed_id"], name: "index_relationships_on_followed_id"
   add_index "relationships", ["follower_id", "followed_id"], name: "index_relationships_on_follower_id_and_followed_id", unique: true
   add_index "relationships", ["follower_id"], name: "index_relationships_on_follower_id"
+
+  create_table "uploadeds", force: true do |t|
+    t.string   "name"
+    t.string   "path"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "users", force: true do |t|
     t.string   "name"

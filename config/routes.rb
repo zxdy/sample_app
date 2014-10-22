@@ -16,6 +16,9 @@ Rails.application.routes.draw do
   match '/about',   to: 'static_pages#about',   via: 'get'
   match '/contact', to: 'static_pages#contact', via: 'get'
   match '/reprocess', to: 'static_pages#reprocess', via: 'get'
+  # match '/upload',  to:'uploaded#upload',via:'post'
+  match '/upload',  to:'static_pages#upload',via:'post'
+  match '/uploadpage',  to: 'static_pages#uploadpage',  via:'get'
   match '/signin',  to: 'sessions#new',         via: 'get'
   match '/signout', to: 'sessions#destroy',     via: 'delete'
   # The priority is based upon order of creation: first created -> highest priority.
