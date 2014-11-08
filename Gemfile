@@ -39,6 +39,7 @@ gem 'bootstrap-will_paginate', '0.0.9'
 gem 'nokogiri'
 gem 'ruby-oci8', '~> 2.1.7'
 gem 'fastercsv', '~> 1.5.5'
+gem 'activerecord-oracle_enhanced-adapter'
 group :doc do
   gem 'sdoc', '0.3.20', require: false
 end
