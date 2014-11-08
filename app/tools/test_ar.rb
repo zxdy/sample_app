@@ -3,6 +3,19 @@ require 'active_record'
 require 'yaml'
 require 'logger'
 
+#database.yml
+# PROD:
+#   adapter:  oracle_enhanced
+#   database: 192.168.231.128/orcl
+#   username: tantan
+#   password: oracle
+# BTS:
+  # adapter:  oracle_enhanced
+  # database: 192.168.231.128/orcl
+  # username: tantan
+  # password: oracle
+
+
 $config = YAML::load(File.open('database.yml'))
 ActiveRecord::Base.logger = Logger.new(File.open('database.log', 'a'))
 
