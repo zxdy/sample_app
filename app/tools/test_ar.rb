@@ -16,12 +16,12 @@ require 'logger'
   # password: oracle
 
 
-$config = YAML::load(File.open('database.yml'))
+$db_config = YAML::load(File.open('database.yml'))
 ActiveRecord::Base.logger = Logger.new(File.open('database.log', 'a'))
 
 class Prod_database < ActiveRecord::Base
   self.abstract_class = true
-  establish_connection $config['PROD']
+  establish_connection $db_config['PROD']
 end
 
 class Bts_database < ActiveRecord::Base
@@ -31,7 +31,7 @@ end
 
 
 module Prod
-  class Test < Prod_database
+  class Test_raw < Prod_database
     self.table_name =  "test_raw"
   end
 end
@@ -42,18 +42,18 @@ module Bts
   end
 end
 
-puts Prod::Test.all.count
+puts Prod::Test_raw.all.count
 params={
     :pool => 'aaaa',
     :start_date => '20141108',
     :end_date => '20141109'
 }
 puts "****"
-puts Prod::Test.where("timestamp>= to_date(:start_date,'yyyymmdd') AND\
+puts Prod::Test_raw.where("timestamp>= to_date(:start_date,'yyyymmdd') AND\
  timestamp <= to_date(:end_date,'yyyymmdd')+1",{start_date:\
   params[:start_date], end_date: params[:end_date]}).count
 
 puts "****"
-puts Prod::Test.where("pool=:pool and timestamp>= to_date(:start_date,'yyyymmdd') AND\
+puts Prod::Test_raw.where("pool=:pool and timestamp>= to_date(:start_date,'yyyymmdd') AND\
  timestamp <= to_date(:end_date,'yyyymmdd')+1",{pool:params[:pool],start_date:\
   params[:start_date], end_date: params[:end_date]}).count
