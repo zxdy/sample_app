@@ -26,7 +26,7 @@ end
 
 class Bts_database < ActiveRecord::Base
   self.abstract_class = true
-  establish_connection $config['BTS']
+  establish_connection $db_config['BTS']
 end
 
 
