@@ -4,11 +4,12 @@ require 'yaml'
 require 'logger'
 require 'pp'
 require 'show_data'
+require 'win32ole'
 
 #database.yml
 # PROD:
 #   adapter:  oracle_enhanced
-#   database: 192.168.231.128/orcl
+#   database: 192.168.231.128/orcl  or TNSNAME setup
 #   username: tantan
 #   password: oracle
 # BTS:
@@ -16,11 +17,8 @@ require 'show_data'
 # database: 192.168.231.128/orcl
 # username: tantan
 # password: oracle
-
-
 $db_config = YAML::load(File.open('database.yml'))
 $tables_config=YAML::load(File.open('tables.yml'))
-ActiveRecord::Base.logger = Logger.new(File.open('database.log', 'a'))
 
 class Prod_database < ActiveRecord::Base
   self.abstract_class = true
@@ -50,50 +48,24 @@ class MetaProgrammingTest
 
 end
 
-
-module Prod
-
-  class User < Prod_database
-    self.table_name = "users"
+def write_excel(params,data)
+  header=['timerange','poolname','BTS','PROD']
+  excel = WIN32OLE::new('excel.Application')
+  workbook = excel.workbooks.add
+  worksheet = workbook.Worksheets(1)
+  worksheet.Select
+  worksheet.Range('A1:D1').value= header
+  data.each do |env,table_rpt|
+    worksheet.Range('A2:A23').value=table_rpt.keys
   end
+  workbook.saveas('c:\1.xlsx')
+  workbook.Close(1)
+  excel.quit
 end
-
-module Bts
-  # class User < Bts_database
-  #   self.table_name = "users"
-  # end
-end
-
-# puts Prod::Test_raw.all.count
-# params={
-#     :pool => 'aaaa',
-#     :start_date => '20141108',
-#     :end_date => '20141109'
-# }
-# puts "****"
-# puts Prod::Test_raw.where("timestamp>= to_date(:start_date,'yyyymmdd') AND\
-#  timestamp <= to_date(:end_date,'yyyymmdd')+1",{start_date:\
-#   params[:start_date], end_date: params[:end_date]}).count
-#
-# puts "****"
-# puts Prod::Test_raw.where("pool=:pool and timestamp>= to_date(:start_date,'yyyymmdd') AND\
-#  timestamp <= to_date(:end_date,'yyyymmdd')+1",{pool:params[:pool],start_date:\
-#   params[:start_date], end_date: params[:end_date]}).count
-
-# puts "prod: "+Prod::User.all.count.to_s
-
-params={
-    :pool => 'msj2',
-    :start_date => '20141101',
-    :end_date => '20141101'
-}
-
-env_rpt={}
 
 def get_data_rpt(server_type,env,params)
   table_rpt={}
   $tables_config[server_type].split(' ').each do |table_name|
-    # puts "bts:" +table+ ' - '+ MetaProgrammingTest.create_class(table,Bts_database).all.count.to_s
     begin
       table=MetaProgrammingTest.create_class(table_name,env)
       data_count=table.where("pool=:pool and timestamp>= to_date(:start_date,'yyyymmdd') AND\
@@ -104,14 +76,26 @@ def get_data_rpt(server_type,env,params)
       table_rpt[table_name]=e
     end
   end
+  puts env+"done!"
   return table_rpt
 end
 
-puts Time.now
-env_rpt['bts']=get_data_rpt("MMP",'B',params)
-env_rpt['prod']=get_data_rpt("MMP",'P',params)
-# env_rpt.push(get_data_rpt("MMP",Prod_database,params))
-# puts env_rpt
-# PP.pp(env_rpt, $>, 40)
-puts format_data(env_rpt)
-puts Time.now
+
+
+if __FILE__== $0
+  ActiveRecord::Base.logger = Logger.new(File.open('database.log', 'a'))
+  params={
+      :pool => 'msj2',
+      :start_date => '20141101',
+      :end_date => '20141101'
+  }
+  start_time=Time.now
+  puts start_time
+  env_rpt={}
+  env_rpt['BTS']=get_data_rpt("MMP",'B',params)
+  # env_rpt['PROD']=get_data_rpt("MMP",'P',params)
+  puts format_data(env_rpt)
+  write_excel(params, env_rpt)
+  end_time=Time.now
+  puts end_time-start_time
+end
