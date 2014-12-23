@@ -76,7 +76,7 @@ def get_data_rpt(server_type,env,params)
       table_rpt[table_name]=e
     end
   end
-  puts env+"done!"
+  puts env+":done!"
   return table_rpt
 end
 
@@ -85,17 +85,17 @@ end
 if __FILE__== $0
   ActiveRecord::Base.logger = Logger.new(File.open('database.log', 'a'))
   params={
-      :pool => 'msj2',
-      :start_date => '20141101',
-      :end_date => '20141101'
+      :pool => 'tsj24',
+      :start_date => '20141201',
+      :end_date => '20141201'
   }
   start_time=Time.now
   puts start_time
   env_rpt={}
-  env_rpt['BTS']=get_data_rpt("MMP",'B',params)
-  # env_rpt['PROD']=get_data_rpt("MMP",'P',params)
+  env_rpt['BTS']=get_data_rpt("TAS",'B',params)
+  env_rpt['PROD']=get_data_rpt("TAS",'P',params)
   puts format_data(env_rpt)
-  write_excel(params, env_rpt)
+  # write_excel(params, env_rpt)
   end_time=Time.now
   puts end_time-start_time
 end
